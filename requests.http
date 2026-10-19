@@ -3,8 +3,48 @@ Content-Type: application/json
 
 {
   "name": "marly",
-  "email": "step_test_2026@gmail.com",
+  "email": "marlyehab2005@gmail.com",
   "password": "12345"
+}
+
+###
+
+POST http://localhost:3000/auth/send-otp
+Content-Type: application/json
+
+{
+  "email": "marlyehab2005@gmail.com"
 
 }
 
+
+###
+
+PATCH http://localhost:3000/auth/verify-account
+Content-Type: application/json
+
+{
+  "email": "marlyehab2005@gmail.com",
+  "code": "695360"
+}
+
+
+
+###
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "marlyehab2005@gmail.com",
+  "password": "12345"
+}
+####
+PATCH http://localhost:3000/auth/reset-password
+Content-Type: application/json
+
+{
+  "email": "marlyehab2005@gmail.com",
+  "code": "877848",
+  "newPassword": "123456"
+}
