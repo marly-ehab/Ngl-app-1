@@ -1,15 +1,15 @@
-POST http://localhost:3000/auth/register
+POST http://127.0.0.1:3001/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "marly",
+  "name": "marly Ehab",
   "email": "marlyehab2005@gmail.com",
-  "password": "12345"
+  "password": "12345678"
 }
 
 ###
 
-POST http://localhost:3000/auth/send-otp
+POST http://127.0.0.1:3001/api/auth/send-otp
 Content-Type: application/json
 
 {
@@ -20,31 +20,110 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/auth/verify-account
+PATCH http://127.0.0.1:3001/api/auth/verify-account
 Content-Type: application/json
 
 {
   "email": "marlyehab2005@gmail.com",
-  "code": "695360"
+  "code": "147345"
 }
 
 
 
 ###
 
-POST http://localhost:3000/auth/login
+POST http://127.0.0.1:3001/api/auth/login
 Content-Type: application/json
 
 {
   "email": "marlyehab2005@gmail.com",
-  "password": "12345"
+  "password": "12345678"
 }
 ####
-PATCH http://localhost:3000/auth/reset-password
+PATCH http://127.0.0.1:3001/api/auth/reset-password
 Content-Type: application/json
 
 {
   "email": "marlyehab2005@gmail.com",
   "code": "877848",
-  "newPassword": "123456"
+  "newPassword": "12345678"
 }
+
+########
+
+POST http://127.0.0.1:3001/api/message
+Content-Type: application/json
+
+{
+  "content": "hi my friend",
+  "receiver": "6abb8f39fa5b202df8475a4b"
+}
+
+########
+POST http://127.0.0.1:3001/api/message/puplic
+Content-Type: application/json
+
+{
+  "content": "hi my friend",
+  "receiver": "6abb8f39fa5b202df8475a4b"
+}
+
+######
+GET http://127.0.0.1:3001/api/message
+Content-Type: application/json
+
+
+######
+POST http://127.0.0.1:3001/api/auth/forget-password
+Content-Type: application/json
+
+{
+  "email": "marlyehab2005@gmail.com"
+}
+
+######
+PATCH http://127.0.0.1:3001/api/auth/enable-2fa
+Content-Type: application/json
+
+{
+  "email": "marlyehab2005@gmail.com",
+  "code": "682256"
+}
+
+########
+POST http://127.0.0.1:3001/api/auth/login/verify-2fa
+Content-Type: application/json
+
+{
+  "email": "marlyehab2005@gmail.com",
+  "code": "682256"
+}
+
+#######
+PATCH http://127.0.0.1:3001/api/user/ID_user/ban
+
+######
+POST http://127.0.0.1:3001/api/message/puplic
+Content-Type: application/json
+
+{
+  "content": "hello test message",
+  "receiver": "6ae0817cdd294f7e81a06093"
+}
+
+######
+POST http://127.0.0.1:3001/api/message/6ae68122e096164f4d02beb4/identity-request
+
+#########
+GET http://127.0.0.1:3001/api/message/identity-requests
+
+########
+PATCH http://127.0.0.1:3001/api/message/identity-requests/6ae68172e096164f4d02beb5
+Content-Type: application/json
+
+{
+  "status": "accepted"
+}
+
+#########
+GET http://127.0.0.1:3001/api/message

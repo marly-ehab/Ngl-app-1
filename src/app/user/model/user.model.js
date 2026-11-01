@@ -36,12 +36,18 @@ const userSchema = new Schema(
             type:Boolean,
             default: false
         },
+        isBanned: { type: Boolean, default: false },
+        isTwoStepEnabled: { type: Boolean, default: false },
+        role: { type: String, enum: ['user', 'admin'], default: 'user' },
         dop:Date,
         gender:{
            type:String,
            enum:['male','female'],
             default:'female'
-        }
+        },
+        profilePicPath: String,
+        coverImagePaths:[String],
+        cvPath:String,
     },
 {
     timestamps: {

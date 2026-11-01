@@ -1,10 +1,10 @@
-import { AppError } from "../../common/error/error.js";
+import { AppError } from "../../lib/error/error.js";
 
 export const userNotExist = () => new AppError("User Not Exist", 404);
 export const userAlreadyExist = () => new AppError("User Already Exist", 409);
 export const userNotVerified = () => new AppError("User Not Verified", 400);
 export const userAlreadyVerified = () => new AppError("User Already Verified", 403);
-
+export const userBanned = () => new AppError("Your account is banned", 403);
 
 
 //class User {

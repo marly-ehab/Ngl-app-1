@@ -7,3 +7,13 @@ export async function updateUserByEmail(email, updatedData) {
         {new: true}
     );
 }
+
+export async function findUserById(id){
+   //return User.findById(id);
+    return User.findOne({_id:id, isDeleted:false},{password:0},{});
+
+}
+
+export async function updateUserById(id, updatedData) {
+    return User.findByIdAndUpdate(id, updatedData, {new: true}).select('-password');
+}

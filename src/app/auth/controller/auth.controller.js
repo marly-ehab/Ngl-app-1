@@ -1,7 +1,7 @@
 import * as authService from "../service/auth.service.js";
-import { toMs } from "../../../common/utils/time.js";
+import { toMs } from "../../../pkg/utils/time.js";
 import { loginDTO, registerDTO, resetPasswordDTO, verifyAccountDTO } from "../dto/auth.dto.js";
-import { AppError } from "../../../common/error/error.js";
+import { AppError } from "../../../lib/error/error.js";
 
 function validateBody(schema, body) {
     const result = schema.safeParse(body);
@@ -42,8 +42,12 @@ export async function verifyAccount(req, res, next) {
 export async function login(req, res, next) {
     try {
         const { email, password } = validateBody(loginDTO, req.body);
-        const token = await authService.login(email, password);
-        res.cookie('access_token', token, {
+        const result = await authService.login(email, password);
+        //2 step verification enabled >> no token yet
+        if (result.twoStepRequired) {
+            return res.json({message: 'verification code sent to your email', success: true, twoStepRequired: true});
+        }
+        res.cookie('access_token', result.token, {
             httpOnly: true,
             maxAge: toMs(1, 'hours'),
         });
@@ -94,6 +98,26 @@ export async function loginWithGoogle(req, res, next) {
         });
 
         res.json({ message: 'user login successfully', success: true });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function verifyLoginTwoStep(req, res, next) {
+    try {
+        const { email, code } = validateBody(verifyAccountDTO, req.body);
+        const token = await authService.verifyLoginTwoStep(email, code);
+        res.cookie('access_token', token, { httpOnly: true, maxAge: toMs(1, 'hours') });
+        res.json({ message: 'User Login Successfully', success: true });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function enableTwoStep(req, res, next) {
+    try {
+        await authService.enableTwoStep(req.user.id);
+        res.json({ message: 'two step verification enabled', success: true });
     } catch (error) {
         next(error);
     }

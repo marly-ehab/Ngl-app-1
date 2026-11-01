@@ -11,12 +11,12 @@ const messageSchema = new Schema(
         },
         receiver: {
             type:Schema.Types.ObjectId,
-            ref:'User',
+            ref:'user',
             required: true,
         },
         sender:{
             type:Schema.Types.ObjectId,
-            ref:'User',
+            ref:'user',
         },
         isDeleted:{
             type:Boolean,
